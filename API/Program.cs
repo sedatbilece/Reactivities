@@ -35,7 +35,9 @@ var services = scope.ServiceProvider;
 try
 {
     var context = services.GetRequiredService<DataContext>();
-     context.Database.Migrate();
+     await context.Database.MigrateAsync();
+     await SeedData.SeedDataFunction(context);
+
       var logger = services.GetRequiredService<ILogger<Program>>();
     logger.LogInformation("Migration successful");
 }
